@@ -26,10 +26,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #4c4c4c;
+    background-color: gray;
     color: #f2f2f2;
     font-weight: bold;
     padding: 4px 8px;
     border-radius: 10px;
     width: 50%;
+}
+
+.pokemon-tipo {
+    display: flex;
+    align-items: center;
+    background-color: blueviolet;
+    color: #f2f2f2;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 10px;
 }

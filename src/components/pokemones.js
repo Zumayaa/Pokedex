@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import './Pokemones.css'
 
-function Pokemon({ id, nombre, imagen }) {
+function Pokemon({ id, nombre, tipo, imagen }) {
     return (
         <div className='pokemon-card'>
             <img src={imagen} alt={nombre} className='pokemon-imagen' />
             <p className='pokemon-titulo'>
                 <span>#{id}</span>
                 <span>{nombre}</span>
+            </p>
+            <p className='pokemon-tipo'>
+                <span>{tipo}</span>
             </p>
         </div>
     )
@@ -30,6 +33,7 @@ function Pokemones() {
                 return {
                     id: poke.id,
                     nombre: poke.name,
+                    tipo: poke.types[0].type.name,
                     imagen: poke.sprites.other.dream_world.front_default
                 }
             })
