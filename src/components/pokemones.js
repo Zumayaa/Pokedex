@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import './Pokemones.css'
+import DetallePokemon from './DetallePokemon';
 
-function Pokemon({ id, nombre, tipo, imagen }) {
+function Pokemon({ id, nombre, tipo, imagen, verPokemon }) {
     return (
-        <div className='pokemon-card'>
+        <div className='pokemon-card' onClick={verPokemon}>
             <img src={imagen} alt={nombre} className='pokemon-imagen' />
             <p className='pokemon-titulo'>
                 <span>#{id}</span>
@@ -18,6 +19,11 @@ function Pokemon({ id, nombre, tipo, imagen }) {
 
 function Pokemones() {
     const [pokemones, setPokemones] = useState([])
+    const [mostrar, setMostrar] = useState({ mostrar: false, pokemon: {} })
+
+    const verPokemon = (pokemon) => setMostrar({ mostrar: true, pokemon })
+
+    const noVerPokemon = () => setMostrar({ mostrar: false, pokemon: {} })
 
     useEffect(() => {
         const getPokemones = async () => {
@@ -44,9 +50,12 @@ function Pokemones() {
         getPokemones()
     }, [])
     return (
-        <section className='pokemon-container'>
-            {pokemones.map(pokemon => <Pokemon {...pokemon} />)}
-        </section>
+        <>
+            <DetallePokemon {...mostrar} cerrar={noVerPokemon} />
+            <section className='pokemon-container'>
+                {pokemones.map(pokemon => <Pokemon {...pokemon} verPokemon={() => verPokemon(pokemon)} />)}
+            </section>
+        </>
     )
 }
 
