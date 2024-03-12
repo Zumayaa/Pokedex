@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Pokemones.css';
 import DetallePokemon from './DetallePokemon';
 
-function Pokemon({ id, nombre, tipo, imagen, verPokemon }) { // Define el componente Pokemon aquí
+function Pokemon({ id, nombre, tipo, imagen, verPokemon, detalles }) {
+    const [mostrarDetalles, setMostrarDetalles] = useState(false);
+
+    const toggleDetalles = () => {
+        setMostrarDetalles(!mostrarDetalles);
+    };
+
     return (
-        <div className='pokemon-card' onClick={verPokemon}>
+        <div className='pokemon-card'>
             <img src={imagen} alt={nombre} className='pokemon-imagen' />
             <p className='pokemon-titulo'>
                 <span>#{id}</span>
@@ -13,6 +19,14 @@ function Pokemon({ id, nombre, tipo, imagen, verPokemon }) { // Define el compon
             <p className='pokemon-tipo'>
                 <span>{tipo}</span>
             </p>
+            <button onClick={toggleDetalles}>
+                {mostrarDetalles ? "Ocultar detalles" : "Mostrar detalles"}
+            </button>
+            <div className={`overlay ${mostrarDetalles ? 'active' : ''}`} onClick={toggleDetalles}></div>
+            <div className={`detalles-container ${mostrarDetalles ? 'active' : ''}`}>
+                <h3>Detalles del Pokémon</h3>
+                <p>{detalles}</p>
+            </div>
         </div>
     )
 }
@@ -38,6 +52,7 @@ function Pokemones({ searchTerm }) {
                         nombre: poke.name,
                         tipo: poke.types[0].type.name,
                         imagen: poke.sprites.other.dream_world.front_default,
+                        detalles: `Altura: ${poke.height}, Peso: ${poke.weight}, Stats: ${poke.stats[1].stat.name} ${poke.stats[2].stat.name}`
                     };
                 }));
                 setPokemones(newPokemones);

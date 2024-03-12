@@ -8,12 +8,18 @@
 }
 
 .pokemon-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
     background-color: lightgrey;
     padding: 5px 0;
+    transition: transform 0.3s ease;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
 }
 
 .pokemon-imagen {
@@ -42,4 +48,39 @@
     font-weight: bold;
     padding: 4px 8px;
     border-radius: 10px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.detalles-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    display: none;
+}
+
+.detalles-container.active {
+    display: block;
 }
